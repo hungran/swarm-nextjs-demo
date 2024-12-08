@@ -29,3 +29,4 @@ arm64:
   variables:
     STAGE_VARIABLE_FOO: "BAR"
     ARCH: "arm64"
+    ENVIRONMENT_NAME: "demo"
