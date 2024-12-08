@@ -23,4 +23,13 @@ docker-build:
     - if: $CI_COMMIT_BRANCH
       exists:
         - Dockerfile
-        - pages/index.js
+
+build-artifact:
+  image: node:14-alpine
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - .next/**
