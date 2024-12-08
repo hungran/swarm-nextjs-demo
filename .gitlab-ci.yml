@@ -16,3 +16,16 @@ amd64:
   variables:
     STAGE_VARIABLE_FOO: "BAR"
     ARCH: "amd64"
+
+arm64:
+  stage: parent
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  trigger:
+    include: build-arm64.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  variables:
+    STAGE_VARIABLE_FOO: "BAR"
+    ARCH: "arm64"

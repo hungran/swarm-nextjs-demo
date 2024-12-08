@@ -1,0 +1,26 @@
+stages:
+  - build
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "parent_pipeline"
+
+build-arm64:
+  stage: build
+  image: docker:cli
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker info
+    - docker buildx create --use
+    - docker buildx inspect --bootstrap
+    - docker buildx build --platform linux/arm64 -t $CI_REGISTRY_IMAGE:arm64 --push .
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
+  environment:
+    name: ${ENVIRONMENT_NAME}
+  needs: []
