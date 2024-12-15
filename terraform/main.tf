@@ -27,6 +27,7 @@ module "ec2" {
   ami_id             = "ami-06650ca7ed78ff6fa"
   instance_type      = "t3.medium"
   security_group_ids = [module.sg.security_group_id]
+  key_name           = "doa202412"
 }
 
 output "ip" {
