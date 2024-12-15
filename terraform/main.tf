@@ -1,6 +1,5 @@
 provider "aws" {
   region  = "ap-southeast-1"
-  profile = "hungran"
 }
 
 module "sg" {
